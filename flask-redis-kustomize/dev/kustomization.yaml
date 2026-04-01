@@ -1,0 +1,25 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - ../base
+
+namePrefix: dev-
+
+labels:
+  - pairs:
+      environment: dev
+    includeSelectors: true
+
+patches:
+  - path: deployment-patch.yaml
+  - target:
+      kind: Service
+      name: service-devops
+    patch: |-
+      - op: replace
+        path: /spec/ports/0/port
+        value: 54321
+      - op: add
+        path: /spec/externalIPs
+        value: ["10.0.2.15"]

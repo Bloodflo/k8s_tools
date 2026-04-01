@@ -1,0 +1,6 @@
+- op: replace
+  path: /spec/ports/0/port
+  value: 54001
+- op: add
+  path: /spec/externalIPs
+  value: ["10.0.2.15"]
